@@ -6,8 +6,9 @@ on:
 
 jobs:
   build:
-    # Only run if the label 'build-app' was added
-    if: contains(github.event.pull_request.labels.*.name, 'build-app')
+    if: |
+      contains(github.event.pull_request.labels.*.name, 'build-app') ||
+      contains(github.event.pull_request.labels.*.name, 'build-apk-release')
     runs-on: ubuntu-latest
 
     steps:
@@ -27,10 +28,23 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build Debug APK
+        if: contains(github.event.pull_request.labels.*.name, 'build-app')
         run: ./gradlew assembleDebug
 
-      - name: Upload APK Artifact
+      - name: Upload Debug APK Artifact
+        if: contains(github.event.pull_request.labels.*.name, 'build-app')
         uses: actions/upload-artifact@v4
         with:
           name: debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Build Release APK
+        if: contains(github.event.pull_request.labels.*.name, 'build-apk-release')
+        run: ./gradlew assembleRelease
+
+      - name: Upload Release APK Artifact
+        if: contains(github.event.pull_request.labels.*.name, 'build-apk-release')
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-apk
+          path: app/build/outputs/apk/release/app-release.apk
