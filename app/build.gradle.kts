@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.max.tfliteapp"
-        minSdk = 30
+        minSdk = 29
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -37,6 +37,10 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+
+    viewBinding {
+        enable = true
+    }
 }
 
 dependencies {
@@ -49,6 +53,7 @@ dependencies {
 
     // Hilt core
     implementation(libs.hilt.android)
+    implementation(libs.androidx.databinding.runtime)
     kapt(libs.hilt.android.compiler)
 
     // Hilt lifecycle ViewModel integration
