@@ -1,16 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?>
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <ConstraintSet android:id="@+id/start">
-        <Constraint android:id="@+id/widget" />
-    </ConstraintSet>
-
-    <ConstraintSet android:id="@+id/end">
-        <Constraint android:id="@id/widget" />
-    </ConstraintSet>
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
-        app:constraintSetEnd="@id/end"
-        app:constraintSetStart="@+id/start" />
+        motion:constraintSetStart="@id/start"
+        motion:constraintSetEnd="@id/end"
+        motion:duration="200"
+        motion:motionInterpolator="easeInOut">
+
+        <OnClick
+            motion:targetId="@id/import_model_button"
+            motion:clickAction="transitionToEnd" />
+    </Transition>
+
+    <ConstraintSet android:id="@id/start">
+        <Constraint android:id="@id/import_model_view_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            motion:cardCornerRadius="24dp"
+            android:backgroundTint="@color/background_color_transition"
+            motion:layout_constraintStart_toStartOf="@+id/import_model_button"
+            motion:layout_constraintEnd_toEndOf="@+id/import_model_button"
+            motion:layout_constraintTop_toTopOf="@+id/import_model_button"
+            motion:layout_constraintBottom_toBottomOf="@+id/import_model_button" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@id/end">
+        <Constraint android:id="@id/import_model_view_placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="1"
+            motion:cardCornerRadius="24dp"
+            android:backgroundTint="@color/background_color_transition"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent"/>
+    </ConstraintSet>
+
 </MotionScene>

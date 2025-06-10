@@ -17,12 +17,17 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        const val TAG = "ImportModelView"
+    }
+
     private val viewModel: MainActivityViewModel by viewModels()
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.i("ImportModelView", "onCreate called")
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
@@ -34,7 +39,14 @@ class MainActivity : AppCompatActivity() {
         initView()
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.importModelView.resetTransition()
+        Log.i("ImportModelView", "onResume called")
+    }
+
     private fun initView() {
+        Log.d(TAG, "onImportModelClicked callback triggered")
         binding.importModelView.onImportModelClicked = {
             modelPickerLauncher.launch(arrayOf("application/octet-stream", "model/tflite"))
         }
@@ -43,6 +55,7 @@ class MainActivity : AppCompatActivity() {
     private val modelPickerLauncher = registerForActivityResult(
         ActivityResultContracts.OpenDocument()
     ) { uri: Uri? ->
+        Log.d(TAG, "Model file selected: $uri")
         uri?.let {
             // Access and use the selected TFLite file
             contentResolver.takePersistableUriPermission(
@@ -51,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             )
 
             // Now you can use the URI, e.g., copy to local storage or load in TFLite
-            Log.d("ModelPicker", "Selected file: $uri")
+            Log.d(TAG, "Selected file: $uri")
         }
     }
 }
