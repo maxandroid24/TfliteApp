@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import androidx.constraintlayout.motion.widget.MotionLayout
+import com.max.tfliteapp.R
 import com.max.tfliteapp.databinding.ImportModelViewBinding
 
 class ImportModelView @JvmOverloads constructor(
@@ -20,7 +21,11 @@ class ImportModelView @JvmOverloads constructor(
         binding.root.setTransitionListener(object : TransitionListener {
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
                 Log.d("ImportModelView", "Transition complete to $currentId")
-                onImportModelClicked?.invoke()
+                if(currentId == R.id.end) {
+                    // Only trigger the callback when the end state is reached and not on reset transition
+                    Log.d("ImportModelView", "End state reached, resetting transition")
+                    onImportModelClicked?.invoke()
+                }
             }
 
             override fun onTransitionStarted(
@@ -49,6 +54,11 @@ class ImportModelView @JvmOverloads constructor(
                 TODO("Not yet implemented")
             }
         })
+    }
+
+    fun resetTransition() {
+        Log.d("ImportModelView", "Transitioning to start state")
+        binding.root.transitionToStart()
     }
 
 }

@@ -39,6 +39,12 @@ class MainActivity : AppCompatActivity() {
         initView()
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.importModelView.resetTransition()
+        Log.i("ImportModelView", "onResume called")
+    }
+
     private fun initView() {
         Log.d(TAG, "onImportModelClicked callback triggered")
         binding.importModelView.onImportModelClicked = {
