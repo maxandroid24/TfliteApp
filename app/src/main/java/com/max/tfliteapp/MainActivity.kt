@@ -62,7 +62,8 @@ class MainActivity : AppCompatActivity() {
                 it,
                 Intent.FLAG_GRANT_READ_URI_PERMISSION
             )
-
+            val intent = Intent(this, OutputActivity::class.java)
+            startActivity(intent)
             // Now you can use the URI, e.g., copy to local storage or load in TFLite
             Log.d(TAG, "Selected file: $uri")
         }
