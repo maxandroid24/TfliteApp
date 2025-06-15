@@ -46,10 +46,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        Log.d(TAG, "onImportModelClicked callback triggered")
         binding.importModelView.onImportModelClicked = {
+            Log.d(TAG, "onImportModelClicked callback triggered")
             modelPickerLauncher.launch(arrayOf("application/octet-stream", "model/tflite"))
         }
+        binding.importModelView.onImportLabelClicked = {
+            Log.d(TAG, "onImportLabelClicked callback triggered")
+            labelPickerLauncher.launch(arrayOf("text/plain"))
+        }
+
     }
 
     private val modelPickerLauncher = registerForActivityResult(
@@ -62,10 +67,48 @@ class MainActivity : AppCompatActivity() {
                 it,
                 Intent.FLAG_GRANT_READ_URI_PERMISSION
             )
-            val intent = Intent(this, OutputActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(this, OutputActivity::class.java).apply {
+//                putExtra("modelUri", it.toString())
+//            }
+            binding.modelNameText.text = getFileNameFromUri(it)
+//            binding.labelNameText.text = it.toString()
             // Now you can use the URI, e.g., copy to local storage or load in TFLite
             Log.d(TAG, "Selected file: $uri")
         }
     }
+
+    private val labelPickerLauncher = registerForActivityResult(
+        ActivityResultContracts.OpenDocument()
+    ) { uri: Uri? ->
+        Log.d(TAG, "Label file selected: $uri")
+        uri?.let {
+            // Access and use the selected TFLite file
+            contentResolver.takePersistableUriPermission(
+                it,
+                Intent.FLAG_GRANT_READ_URI_PERMISSION
+            )
+//            val intent = Intent(this, OutputActivity::class.java).apply {
+//                putExtra("modelUri", it.toString())
+//            }
+            binding.labelNameText.text = getFileNameFromUri(it)
+//            binding.labelNameText.text = it.toString()
+            // Now you can use the URI, e.g., copy to local storage or load in TFLite
+            Log.d(TAG, "Selected file: $uri")
+        }
+    }
+
+    private fun getFileNameFromUri(uri: Uri): String {
+        var result = "unknown_file"
+        val cursor = contentResolver.query(uri, null, null, null, null)
+        cursor?.use {
+            if (it.moveToFirst()) {
+                val nameIndex = it.getColumnIndex("_display_name")
+                if (nameIndex != -1) {
+                    result = it.getString(nameIndex)
+                }
+            }
+        }
+        return result
+    }
+
 }

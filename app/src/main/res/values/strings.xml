@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">TfliteApp</string>
     <string name="button_text">Button</string>
-    <string name="import_from_storage_button_text">Import from storage</string>
+    <string name="import_model_text">Import model</string>
+    <string name="import_label_text">Import label</string>
+    <string name="continue_text">Continue</string>
 </resources>

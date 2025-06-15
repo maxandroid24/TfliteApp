@@ -16,15 +16,22 @@ class ImportModelView @JvmOverloads constructor(
 
     private val binding = ImportModelViewBinding.inflate(LayoutInflater.from(context), this, true)
     var onImportModelClicked: (() -> Unit)? = null
+    var onImportLabelClicked: (() -> Unit)? = null
 
     init {
         binding.root.setTransitionListener(object : TransitionListener {
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
                 Log.d("ImportModelView", "Transition complete to $currentId")
-                if(currentId == R.id.end) {
-                    // Only trigger the callback when the end state is reached and not on reset transition
-                    Log.d("ImportModelView", "End state reached, resetting transition")
-                    onImportModelClicked?.invoke()
+                when (currentId) {
+                    R.id.end -> {
+                        onImportModelClicked?.invoke()
+                    }
+                    R.id.end_label -> {
+                        onImportLabelClicked?.invoke()
+                    }
+                    else -> {
+                        Log.d("ImportModelView", "Transitioned to unknown state: $currentId")
+                    }
                 }
             }
 

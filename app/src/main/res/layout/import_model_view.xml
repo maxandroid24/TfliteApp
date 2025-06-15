@@ -10,14 +10,30 @@
         android:id="@+id/import_model_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/import_from_storage_button_text"
+        android:text="@string/import_model_text"
         android:drawableStart="@drawable/ic_upload"
         android:background="@drawable/button_background"
         android:drawablePadding="8dp"
         android:paddingHorizontal="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/import_label_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/import_label_text"
+        android:drawableStart="@drawable/ic_upload"
+        android:background="@drawable/button_background"
+        android:drawablePadding="8dp"
+        android:paddingHorizontal="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/import_model_button" />
+
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/import_model_view_placeholder"
@@ -30,9 +46,19 @@
         app:layout_constraintStart_toStartOf="@+id/import_model_button"
         app:layout_constraintEnd_toEndOf="@+id/import_model_button"
         app:layout_constraintTop_toTopOf="@+id/import_model_button"
-        app:layout_constraintBottom_toBottomOf="@+id/import_model_button">
+        app:layout_constraintBottom_toBottomOf="@+id/import_model_button"/>
 
-        <!-- Add your actual content here if needed -->
-    </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/import_label_view_placeholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:elevation="8dp"
+        app:cardCornerRadius="24dp"
+        android:backgroundTint="@color/background_color_transition"
+        app:layout_constraintStart_toStartOf="@+id/import_label_button"
+        app:layout_constraintEnd_toEndOf="@+id/import_label_button"
+        app:layout_constraintTop_toTopOf="@+id/import_label_button"
+        app:layout_constraintBottom_toBottomOf="@+id/import_label_button"/>
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
