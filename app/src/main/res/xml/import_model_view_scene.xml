@@ -4,7 +4,7 @@
     <Transition
         motion:constraintSetStart="@id/start"
         motion:constraintSetEnd="@id/end"
-        motion:duration="150"
+        motion:duration="1050"
         motion:motionInterpolator="easeInOut">
 
         <OnClick
@@ -15,7 +15,7 @@
     <Transition
         motion:constraintSetStart="@id/start"
         motion:constraintSetEnd="@id/end_label"
-        motion:duration="150"
+        motion:duration="1050"
         motion:motionInterpolator="easeInOut">
 
         <OnClick
@@ -30,10 +30,10 @@
             android:alpha="0"
             motion:cardCornerRadius="24dp"
             android:backgroundTint="@color/background_color_transition"
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintBottom_toBottomOf="parent" />
+            motion:layout_constraintStart_toStartOf="@+id/import_model_button"
+            motion:layout_constraintEnd_toEndOf="@+id/import_model_button"
+            motion:layout_constraintTop_toTopOf="@+id/import_model_button"
+            motion:layout_constraintBottom_toBottomOf="@+id/import_model_button" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@id/end">
