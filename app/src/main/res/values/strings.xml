@@ -4,4 +4,6 @@
     <string name="import_model_text">Import model</string>
     <string name="import_label_text">Import label</string>
     <string name="continue_text">Continue</string>
+    <string name="model_name">Model Name</string>
+    <string name="label_name">Label Name</string>
 </resources>

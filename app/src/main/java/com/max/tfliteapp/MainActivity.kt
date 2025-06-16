@@ -4,10 +4,12 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.max.tfliteapp.databinding.ActivityMainBinding
@@ -70,6 +72,8 @@ class MainActivity : AppCompatActivity() {
 //            val intent = Intent(this, OutputActivity::class.java).apply {
 //                putExtra("modelUri", it.toString())
 //            }
+            binding.modelInfoContainer.background = ContextCompat.getDrawable(this, R.drawable.button_background)
+            binding.modelInfoLayout.visibility = View.VISIBLE
             binding.modelNameText.text = getFileNameFromUri(it)
 //            binding.labelNameText.text = it.toString()
             // Now you can use the URI, e.g., copy to local storage or load in TFLite
@@ -90,6 +94,8 @@ class MainActivity : AppCompatActivity() {
 //            val intent = Intent(this, OutputActivity::class.java).apply {
 //                putExtra("modelUri", it.toString())
 //            }
+            binding.modelInfoContainer.background = ContextCompat.getDrawable(this, R.drawable.button_background)
+            binding.labelInfoLayout.visibility = View.VISIBLE
             binding.labelNameText.text = getFileNameFromUri(it)
 //            binding.labelNameText.text = it.toString()
             // Now you can use the URI, e.g., copy to local storage or load in TFLite
